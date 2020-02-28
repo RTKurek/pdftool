@@ -1,6 +1,8 @@
 from pdfrw import PdfReader
 import argparse
-from math import isclose
+
+def isclose(a, b, tol=0.0001):
+    return abs(a - b) < tol
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -13,12 +15,14 @@ if __name__ == '__main__':
         width = r - l
         height = b - t
         if isclose(width, 8.5) and isclose(height, 11):
-            print(f'Page {page_num+1:>3}   valid: Letter - Portrait')
+            print('Page {:>3}   valid: Letter - Portrait'.format(page_num+1))
         elif isclose(width, 11) and isclose(height, 8.5):
-            print(f'Page {page_num+1:>3}   valid: Letter - Landscape')
+            print('Page {:>3}   valid: Letter - Landscape'.format(page_num+1))
         elif isclose(width, 17) and isclose(height, 11):
-            print(f'Page {page_num+1:>3}   valid: 11x17 - Landscape')
+            print('Page {:>3}   valid: 11x17 - Landscape'.format(page_num+1))
         elif isclose(width, 11) and isclose(height, 17):
-            print(f'Page {page_num+1:>3}   valid: 11x17 - Portrait')
+            print('Page {:>3}   valid: 11x17 - Portrait'.format(page_num+1))
         else:
-            print(f'Page {page_num+1:>3} invalid: {width:2.5}x{height:2.5}')
+            print('Page {:>3} invalid: {:2.5}x{:2.5}'.format(page_num+1,
+                                                             width, height))
+
