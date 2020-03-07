@@ -1,4 +1,4 @@
-from pdfrw import PdfReader
+from pdfrw import PdfReader, PdfWriter
 import argparse
 
 
@@ -14,6 +14,13 @@ def invalid_size(page):
                 (isclose(width, 11) and isclose(height, 8.5)) or
                 (isclose(width, 17) and isclose(height, 11)) or
                 (isclose(width, 11) and isclose(height, 17)))
+
+
+def resize_pages(reader):
+    writer = PdfWriter()
+    for page in reader.pages:
+        writer.addpage(page)
+    return writer
 
 
 def formatted_range(nums):
